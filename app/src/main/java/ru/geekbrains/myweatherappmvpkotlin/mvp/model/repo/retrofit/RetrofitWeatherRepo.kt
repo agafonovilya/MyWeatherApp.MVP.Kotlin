@@ -1,6 +1,5 @@
 package ru.geekbrains.myweatherappmvpkotlin.mvp.model.repo.retrofit
 
-import android.util.Log
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.geekbrains.myweatherappmvpkotlin.BuildConfig

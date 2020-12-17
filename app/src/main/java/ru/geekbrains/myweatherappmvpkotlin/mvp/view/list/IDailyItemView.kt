@@ -1,8 +1,8 @@
 package ru.geekbrains.myweatherappmvpkotlin.mvp.view.list
 
 interface IDailyItemView: IItemView {
-    fun setDate(date: String)
-    fun setDayTemperature(dayTemperature: String)
-    fun setNightTemperature(nightTemperature: String)
+    fun setDate(date: Int)
+    fun setDayTemperature(dayTemperature: Double)
+    fun setNightTemperature(nightTemperature: Double)
     fun loadIcon(url: String)
 }

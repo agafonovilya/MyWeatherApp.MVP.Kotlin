@@ -4,6 +4,10 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class Current {
+    @SerializedName("dt")
+    @Expose
+    var dt: Int? = null
+
     @SerializedName("temp")
     @Expose
     var temp: Double? = null

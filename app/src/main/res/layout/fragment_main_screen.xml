@@ -20,15 +20,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/settings_btn"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            app:icon="@drawable/ic_baseline_settings_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -43,11 +34,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <!--android:background="@color/currentWeatherBackground"-->
+                android:layout_height="wrap_content"
+                android:background="@color/currentWeatherBackground">
+
 
                 <TextView
-                    android:text="update_time"
                     android:id="@+id/mainScreen_lastUpdateTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,7 +46,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:text="city_name"
                     android:id="@+id/mainScreen_cityName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -82,7 +72,6 @@
                     app:layout_constraintTop_toBottomOf="@id/mainScreen_cityName">
 
                     <TextView
-                        android:text="temperature"
                         android:id="@+id/mainScreen_currentTemperature"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
@@ -100,7 +89,6 @@
                 </LinearLayout>
 
                 <TextView
-                    android:text="description"
                     android:id="@+id/mainScreen_currentWeatherDescription"
                     android:layout_width="200dp"
                     android:layout_height="20dp"

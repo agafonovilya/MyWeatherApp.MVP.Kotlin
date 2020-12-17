@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MyWeatherApp.MVP.Kotlin</string>
+    <string name="change_city">Change city</string>
+    <string-array name="arrayOfCity">
+        <item>Moscow,RU</item>
+        <item>Saint Petersburg,RU</item>
+        <item>Glazov,RU</item>
+    </string-array>
 </resources>

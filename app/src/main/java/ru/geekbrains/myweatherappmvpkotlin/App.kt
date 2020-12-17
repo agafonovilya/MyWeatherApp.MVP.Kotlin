@@ -5,7 +5,6 @@ import ru.geekbrains.myweatherappmvpkotlin.di.AppComponent
 import ru.geekbrains.myweatherappmvpkotlin.di.DaggerAppComponent
 import ru.geekbrains.myweatherappmvpkotlin.di.location.LocationSubcomponent
 import ru.geekbrains.myweatherappmvpkotlin.di.module.AppModule
-import ru.geekbrains.myweatherappmvpkotlin.di.settings.SettingsSubcomponent
 
 class App: Application() {
     companion object {
@@ -18,9 +17,6 @@ class App: Application() {
     var locationSubcomponent: LocationSubcomponent? = null
         private set
 
-    var settingsSubcomponent: SettingsSubcomponent? = null
-        private set
-
     override fun onCreate() {
         super.onCreate()
         instance = this
@@ -29,7 +25,4 @@ class App: Application() {
 
     fun initLocationSubcomponent() = appComponent.locationSubcomponent().also { locationSubcomponent = it }
     fun releaseLocationSubcomponent() { locationSubcomponent = null}
-    fun initSettingsSubcomponent() = appComponent.settingsSubcomponent().also { settingsSubcomponent = it }
-    fun releaseSettingsSubcomponent() { settingsSubcomponent = null}
-
 }

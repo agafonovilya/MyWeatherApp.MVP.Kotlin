@@ -7,11 +7,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_daily.view.*
-import kotlinx.android.synthetic.main.item_hourly.view.*
 import ru.geekbrains.myweatherappmvpkotlin.R
 import ru.geekbrains.myweatherappmvpkotlin.mvp.model.image.IImageLoader
 import ru.geekbrains.myweatherappmvpkotlin.mvp.presenter.list.IDailyListPresenter
 import ru.geekbrains.myweatherappmvpkotlin.mvp.view.list.IDailyItemView
+import ru.geekbrains.myweatherappmvpkotlin.ui.format.formatDateDdMmmm
+import ru.geekbrains.myweatherappmvpkotlin.ui.format.formatTemperature
 import javax.inject.Inject
 
 class DailyRvAdapter(val presenter: IDailyListPresenter):
@@ -34,16 +35,16 @@ class DailyRvAdapter(val presenter: IDailyListPresenter):
 
         override var pos = -1
 
-        override fun setDate(date: String) = with(containerView){
-            weekCard_date.text = date
+        override fun setDate(date: Int) = with(containerView){
+            weekCard_date.text = formatDateDdMmmm(date)
         }
 
-        override fun setDayTemperature(dayTemperature: String) = with(containerView){
-            weekCard_dayTemperature.text = dayTemperature
+        override fun setDayTemperature(dayTemperature: Double) = with(containerView){
+            weekCard_dayTemperature.text = formatTemperature(dayTemperature)
         }
 
-        override fun setNightTemperature(nightTemperature: String) = with(containerView) {
-            weekCard_nightTemperature.text = nightTemperature
+        override fun setNightTemperature(nightTemperature: Double) = with(containerView) {
+            weekCard_nightTemperature.text = formatTemperature(nightTemperature)
         }
 
         override fun loadIcon(url: String) = with(containerView){

@@ -12,12 +12,12 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.security.MessageDigest
 
-class RoomImageCache(val db: Database, val dir: File) : IImageCache {
+class RoomImageCache(private val db: Database, private val dir: File) : IImageCache {
     private fun String.md5() = hash("MD5")
     private fun String.hash(algorithm: String) = MessageDigest
             .getInstance(algorithm)
             .digest(toByteArray())
-            .fold("", { str, it -> "%02x".format(it) })
+            .fold("", { _, it -> "%02x".format(it) })
 
     override fun getBytes(url: String) = Maybe.fromCallable {
         db.imageDao.findByUrl(url)?.let {

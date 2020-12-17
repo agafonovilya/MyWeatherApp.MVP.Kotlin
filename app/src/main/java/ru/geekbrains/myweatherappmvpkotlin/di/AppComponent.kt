@@ -3,7 +3,6 @@ package ru.geekbrains.myweatherappmvpkotlin.di
 import dagger.Component
 import ru.geekbrains.myweatherappmvpkotlin.di.location.LocationSubcomponent
 import ru.geekbrains.myweatherappmvpkotlin.di.module.*
-import ru.geekbrains.myweatherappmvpkotlin.di.settings.SettingsSubcomponent
 import ru.geekbrains.myweatherappmvpkotlin.mvp.presenter.MainPresenter
 import ru.geekbrains.myweatherappmvpkotlin.mvp.presenter.MainScreenPresenter
 import ru.geekbrains.myweatherappmvpkotlin.ui.activity.MainActivity
@@ -19,10 +18,10 @@ import javax.inject.Singleton
     CiceroneModule::class,
     DatabaseModule::class,
     ImageModule::class,
-    RepoModule::class
+    RepoModule::class,
+    SharedPrefModule::class
 ])
 interface AppComponent {
-    fun settingsSubcomponent(): SettingsSubcomponent
     fun locationSubcomponent(): LocationSubcomponent
 
     fun inject(mainActivity: MainActivity)
