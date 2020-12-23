@@ -17,6 +17,7 @@ class RetrofitWeatherRepo(val api: IDataSource,
                             longitude: String,
                             exclude: String,
                             appLanguage: String): Single<OneCallRequest> =
+
             networkStatus.isOnlineSingle().flatMap { isOnline ->
                 if (isOnline) {
                     api.loadWeather(latitude, longitude, exclude, BuildConfig.WEATHER_API_KEY, appLanguage)

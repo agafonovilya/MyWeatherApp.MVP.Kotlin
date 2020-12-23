@@ -30,6 +30,7 @@ class MainScreenPresenter: MvpPresenter<IMainScreenView>() {
         val hourlyWeather = mutableListOf<Hourly>()
 
         override fun getCount() = hourlyWeather.size
+        override var itemClickListener: ((IHourlyItemView) -> Unit)? = null
 
         override fun bindView(view: IHourlyItemView) {
             val weather = hourlyWeather[view.pos]
@@ -46,6 +47,7 @@ class MainScreenPresenter: MvpPresenter<IMainScreenView>() {
         val dailyWeather = mutableListOf<Daily>()
 
         override fun getCount() = dailyWeather.size
+        override var itemClickListener: ((IDailyItemView) -> Unit)? = null
 
         override fun bindView(view: IDailyItemView) {
             val weather  = dailyWeather[view.pos]
@@ -67,6 +69,10 @@ class MainScreenPresenter: MvpPresenter<IMainScreenView>() {
         super.onFirstViewAttach()
         viewState.init()
         loadWeather()
+
+        dailyListPresenter.itemClickListener = {
+            router.navigateTo(Screens.DailyScreen(it.unixUTC))
+        }
     }
 
 

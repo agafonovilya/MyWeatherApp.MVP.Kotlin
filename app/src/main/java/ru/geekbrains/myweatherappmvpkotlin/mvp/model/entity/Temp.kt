@@ -11,4 +11,12 @@ class Temp {
     @SerializedName("night")
     @Expose
     var night: Double? = null
+
+    @SerializedName("morn")
+    @Expose
+    var morning: Double? = null
+
+    @SerializedName("eve")
+    @Expose
+    var evening: Double? = null
 }

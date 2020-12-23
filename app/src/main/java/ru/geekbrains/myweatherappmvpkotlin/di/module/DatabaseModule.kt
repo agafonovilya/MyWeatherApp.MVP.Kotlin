@@ -12,5 +12,6 @@ class DatabaseModule {
     @Singleton
     @Provides
     fun database(app: App): Database =
-            Room.databaseBuilder(app, Database::class.java, Database.DB_NAME).build()
+            Room.databaseBuilder(app, Database::class.java, Database.DB_NAME)
+                    .build()
 }

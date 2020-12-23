@@ -36,11 +36,11 @@ class HourlyRvAdapter(val presenter: IHourlyListPresenter):
         override var pos = -1
 
         override fun setTime(time: Int) = with(containerView) {
-            hourlyCard_time.text = formatTimeHhMm(time)
+            hourlyCard_time.text = formatUnixUtcHhMm(time)
         }
 
         override fun setTemperature(temperature: Double) = with(containerView) {
-            hourlyCard_temperature.text = formatTemperature(temperature)
+            hourlyCard_temperature.text = formatTemperatureKelToCel(temperature)
         }
 
         override fun loadIcon(url: String) = with(containerView){

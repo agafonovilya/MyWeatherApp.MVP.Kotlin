@@ -3,12 +3,12 @@ package ru.geekbrains.myweatherappmvpkotlin.mvp.presenter
 import moxy.MvpPresenter
 import ru.geekbrains.myweatherappmvpkotlin.mvp.model.repo.location.LocationRepo
 import ru.geekbrains.myweatherappmvpkotlin.mvp.model.savedpreferences.ISavedPreferences
-import ru.geekbrains.myweatherappmvpkotlin.mvp.view.ILocationView
+import ru.geekbrains.myweatherappmvpkotlin.mvp.view.ILocationScreenView
 import ru.geekbrains.myweatherappmvpkotlin.ui.sharedpreferences.SharedPrefKeys
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
-class LocationPresenter: MvpPresenter<ILocationView>() {
+class LocationPresenter: MvpPresenter<ILocationScreenView>() {
 
     @Inject lateinit var router: Router
     @Inject lateinit var sharedPreferences: ISavedPreferences

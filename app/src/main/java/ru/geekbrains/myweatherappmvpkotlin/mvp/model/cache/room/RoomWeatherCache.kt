@@ -3,6 +3,7 @@ package ru.geekbrains.myweatherappmvpkotlin.mvp.model.cache.room
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.rxjava3.subjects.AsyncSubject
 import ru.geekbrains.myweatherappmvpkotlin.mvp.model.cache.IWeatherCache
 import ru.geekbrains.myweatherappmvpkotlin.mvp.model.entity.*
 import ru.geekbrains.myweatherappmvpkotlin.mvp.model.entity.room.Database
@@ -10,7 +11,7 @@ import ru.geekbrains.myweatherappmvpkotlin.mvp.model.entity.room.RoomCurrent
 import ru.geekbrains.myweatherappmvpkotlin.mvp.model.entity.room.RoomDaily
 import ru.geekbrains.myweatherappmvpkotlin.mvp.model.entity.room.RoomHourly
 
-class RoomWeatherCache(val db:Database): IWeatherCache {
+class RoomWeatherCache(private val db:Database): IWeatherCache {
     override fun getWeather(): Single<OneCallRequest> {
         return Single.fromCallable {
             val oneCallRequest = OneCallRequest()
@@ -45,13 +46,18 @@ class RoomWeatherCache(val db:Database): IWeatherCache {
                 val temp = Temp()
                 temp.day = it.dayTemperature
                 temp.night = it.nightTemperature
+                temp.morning = it.morningTemperature
+                temp.evening = it.eveningTemperature
 
                 val dailyWeather = DailyWeather()
+                dailyWeather.description = it.description
                 dailyWeather.icon = it.icon
 
                 val daily = Daily()
                 daily.dt = it.dt
                 daily.temp = temp
+                daily.humidity = it.humidity
+                daily.wind  = it.wind
                 daily.weather = listOf(dailyWeather)
 
                 oneCallRequest.daily!!.add(daily)
@@ -66,16 +72,25 @@ class RoomWeatherCache(val db:Database): IWeatherCache {
             val roomHourly: MutableList<RoomHourly> = ArrayList()
             val roomDaily: MutableList<RoomDaily> = ArrayList()
             val roomCurrent = RoomCurrent(
-                    oneCallRequest.current?.dt,
-                    oneCallRequest.current?.temp,
-                    oneCallRequest.current?.weather?.get(0)?.description,
-                    oneCallRequest.current?.weather?.get(0)?.icon)
+                    dt = oneCallRequest.current?.dt,
+                    temp = oneCallRequest.current?.temp,
+                    description = oneCallRequest.current?.weather?.get(0)?.description,
+                    icon = oneCallRequest.current?.weather?.get(0)?.icon)
 
             oneCallRequest.hourly?.forEach {
                 roomHourly.add(RoomHourly(it.dt, it.temp, it.weather?.get(0)?.icon))
             }
             oneCallRequest.daily?.forEach{
-                roomDaily.add(RoomDaily(it.dt, it.temp?.day, it.temp?.night, it.weather?.get(0)?.icon))
+                roomDaily.add(RoomDaily(
+                        dt = it.dt,
+                        dayTemperature = it.temp?.day,
+                        nightTemperature = it.temp?.night,
+                        morningTemperature = it.temp?.morning,
+                        eveningTemperature = it.temp?.evening,
+                        humidity = it.humidity,
+                        wind = it.wind,
+                        description = it.weather?.get(0)?.description,
+                        icon = it.weather?.get(0)?.icon))
             }
 
             with(db.currentDao){
@@ -86,5 +101,32 @@ class RoomWeatherCache(val db:Database): IWeatherCache {
             db.hourlyDao.insert(roomHourly)
             db.dailyDao.insert(roomDaily)
         }.subscribeOn(Schedulers.io())
+    }
+
+    override fun getDayWeather(unixUTC: Int?): Single<Daily> {
+        return Single.fromCallable {
+            val daily = Daily()
+            val roomDaily: RoomDaily = db.dailyDao.getByDt(unixUTC)
+
+            with(roomDaily) {
+                val temp = Temp()
+                temp.day = dayTemperature
+                temp.night = nightTemperature
+                temp.morning = morningTemperature
+                temp.evening = eveningTemperature
+
+                val dailyWeather = DailyWeather()
+                dailyWeather.description = description
+                dailyWeather.icon = icon
+
+                daily.dt = dt
+                daily.temp = temp
+                daily.humidity = humidity
+                daily.wind  = wind
+                daily.weather = listOf(dailyWeather)
+            }
+
+            return@fromCallable daily
+        }
     }
 }

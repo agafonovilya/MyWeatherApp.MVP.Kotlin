@@ -13,10 +13,10 @@ import ru.geekbrains.myweatherappmvpkotlin.App
 import ru.geekbrains.myweatherappmvpkotlin.R
 import ru.geekbrains.myweatherappmvpkotlin.di.location.LocationSubcomponent
 import ru.geekbrains.myweatherappmvpkotlin.mvp.presenter.LocationPresenter
-import ru.geekbrains.myweatherappmvpkotlin.mvp.view.ILocationView
+import ru.geekbrains.myweatherappmvpkotlin.mvp.view.ILocationScreenView
 import ru.geekbrains.myweatherappmvpkotlin.ui.IBackButtonListener
 
-class LocationFragment: MvpAppCompatFragment(), ILocationView, IBackButtonListener {
+class LocationFragment: MvpAppCompatFragment(), ILocationScreenView, IBackButtonListener {
     companion object{
         fun newInstance() = LocationFragment()
     }

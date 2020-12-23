@@ -1,6 +1,7 @@
 package ru.geekbrains.myweatherappmvpkotlin.di
 
 import dagger.Component
+import ru.geekbrains.myweatherappmvpkotlin.di.daily.DailySubcomponent
 import ru.geekbrains.myweatherappmvpkotlin.di.location.LocationSubcomponent
 import ru.geekbrains.myweatherappmvpkotlin.di.module.*
 import ru.geekbrains.myweatherappmvpkotlin.mvp.presenter.MainPresenter
@@ -23,6 +24,7 @@ import javax.inject.Singleton
 ])
 interface AppComponent {
     fun locationSubcomponent(): LocationSubcomponent
+    fun dailySubcomponent(): DailySubcomponent
 
     fun inject(mainActivity: MainActivity)
     fun inject(mainPresenter: MainPresenter)

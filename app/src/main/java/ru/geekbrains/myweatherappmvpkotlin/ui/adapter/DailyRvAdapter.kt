@@ -11,8 +11,8 @@ import ru.geekbrains.myweatherappmvpkotlin.R
 import ru.geekbrains.myweatherappmvpkotlin.mvp.model.image.IImageLoader
 import ru.geekbrains.myweatherappmvpkotlin.mvp.presenter.list.IDailyListPresenter
 import ru.geekbrains.myweatherappmvpkotlin.mvp.view.list.IDailyItemView
-import ru.geekbrains.myweatherappmvpkotlin.ui.format.formatDateDdMmmm
-import ru.geekbrains.myweatherappmvpkotlin.ui.format.formatTemperature
+import ru.geekbrains.myweatherappmvpkotlin.ui.format.formatUnixUtcDdMmmm
+import ru.geekbrains.myweatherappmvpkotlin.ui.format.formatTemperatureKelToCel
 import javax.inject.Inject
 
 class DailyRvAdapter(val presenter: IDailyListPresenter):
@@ -25,6 +25,7 @@ class DailyRvAdapter(val presenter: IDailyListPresenter):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.pos = position
+        holder.containerView.setOnClickListener { presenter.itemClickListener?.invoke(holder) }
         presenter.bindView(holder)
     }
 
@@ -34,17 +35,19 @@ class DailyRvAdapter(val presenter: IDailyListPresenter):
             RecyclerView.ViewHolder(containerView), LayoutContainer, IDailyItemView {
 
         override var pos = -1
+        override var unixUTC: Int = -1
 
         override fun setDate(date: Int) = with(containerView){
-            weekCard_date.text = formatDateDdMmmm(date)
+            unixUTC = date
+            weekCard_date.text = formatUnixUtcDdMmmm(date)
         }
 
         override fun setDayTemperature(dayTemperature: Double) = with(containerView){
-            weekCard_dayTemperature.text = formatTemperature(dayTemperature)
+            weekCard_dayTemperature.text = formatTemperatureKelToCel(dayTemperature)
         }
 
         override fun setNightTemperature(nightTemperature: Double) = with(containerView) {
-            weekCard_nightTemperature.text = formatTemperature(nightTemperature)
+            weekCard_nightTemperature.text = formatTemperatureKelToCel(nightTemperature)
         }
 
         override fun loadIcon(url: String) = with(containerView){

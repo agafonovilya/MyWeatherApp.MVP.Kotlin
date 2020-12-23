@@ -3,6 +3,7 @@ package ru.geekbrains.myweatherappmvpkotlin
 import android.app.Application
 import ru.geekbrains.myweatherappmvpkotlin.di.AppComponent
 import ru.geekbrains.myweatherappmvpkotlin.di.DaggerAppComponent
+import ru.geekbrains.myweatherappmvpkotlin.di.daily.DailySubcomponent
 import ru.geekbrains.myweatherappmvpkotlin.di.location.LocationSubcomponent
 import ru.geekbrains.myweatherappmvpkotlin.di.module.AppModule
 
@@ -16,6 +17,7 @@ class App: Application() {
 
     var locationSubcomponent: LocationSubcomponent? = null
         private set
+    var dailySubcomponent: DailySubcomponent? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -25,4 +27,6 @@ class App: Application() {
 
     fun initLocationSubcomponent() = appComponent.locationSubcomponent().also { locationSubcomponent = it }
     fun releaseLocationSubcomponent() { locationSubcomponent = null}
+    fun initDailySubcomponent() = appComponent.dailySubcomponent().also { dailySubcomponent = it }
+    fun releaseDailySubcomponent() { dailySubcomponent = null}
 }
