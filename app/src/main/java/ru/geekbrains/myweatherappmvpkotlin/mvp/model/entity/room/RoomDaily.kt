@@ -1,0 +1,12 @@
+package ru.geekbrains.myweatherappmvpkotlin.mvp.model.entity.room
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+class RoomDaily (
+        @PrimaryKey var dt: Int?,
+        var dayTemperature: Double?,
+        var nightTemperature: Double?,
+        var icon: String?
+        )
