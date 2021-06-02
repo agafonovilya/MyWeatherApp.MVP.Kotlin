@@ -15,7 +15,7 @@ import javax.inject.Singleton
 class RepoModule {
     @Provides
     fun weatherCache(database: Database): IWeatherCache {
-        return  RoomWeatherCache(database)
+        return RoomWeatherCache(database)
     }
 
     @Singleton

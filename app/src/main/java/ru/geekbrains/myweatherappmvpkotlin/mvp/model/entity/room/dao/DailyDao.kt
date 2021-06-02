@@ -28,4 +28,7 @@ interface DailyDao {
 
     @Query("SELECT * FROM RoomDaily")
     fun getAll(): List<RoomDaily>
+
+    @Query("SELECT * FROM RoomDaily WHERE dt = :dt")
+    fun getByDt(dt:Int?): RoomDaily
 }

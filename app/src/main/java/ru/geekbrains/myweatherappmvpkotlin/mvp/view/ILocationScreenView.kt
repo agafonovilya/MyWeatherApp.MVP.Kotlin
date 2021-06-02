@@ -5,7 +5,8 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface ISettingsView:MvpView {
+interface ILocationScreenView: MvpView {
     fun init()
+    fun initAutoCompeteTextView(citiesList: List<String>)
     fun release()
 }

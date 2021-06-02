@@ -1,6 +1,5 @@
 package ru.geekbrains.myweatherappmvpkotlin.mvp.model.repo.retrofit
 
-import android.util.Log
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.geekbrains.myweatherappmvpkotlin.BuildConfig
@@ -18,6 +17,7 @@ class RetrofitWeatherRepo(val api: IDataSource,
                             longitude: String,
                             exclude: String,
                             appLanguage: String): Single<OneCallRequest> =
+
             networkStatus.isOnlineSingle().flatMap { isOnline ->
                 if (isOnline) {
                     api.loadWeather(latitude, longitude, exclude, BuildConfig.WEATHER_API_KEY, appLanguage)

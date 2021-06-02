@@ -8,5 +8,10 @@ class RoomDaily (
         @PrimaryKey var dt: Int?,
         var dayTemperature: Double?,
         var nightTemperature: Double?,
+        var morningTemperature: Double?,
+        var eveningTemperature: Double?,
+        var humidity: Int?,
+        var wind: Double?,
+        var description: String?,
         var icon: String?
         )

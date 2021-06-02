@@ -11,6 +11,8 @@ import ru.geekbrains.myweatherappmvpkotlin.R
 import ru.geekbrains.myweatherappmvpkotlin.mvp.model.image.IImageLoader
 import ru.geekbrains.myweatherappmvpkotlin.mvp.presenter.list.IHourlyListPresenter
 import ru.geekbrains.myweatherappmvpkotlin.mvp.view.list.IHourlyItemView
+import ru.geekbrains.myweatherappmvpkotlin.ui.format.*
+
 import javax.inject.Inject
 
 class HourlyRvAdapter(val presenter: IHourlyListPresenter):
@@ -33,12 +35,12 @@ class HourlyRvAdapter(val presenter: IHourlyListPresenter):
 
         override var pos = -1
 
-        override fun setTime(time: String) = with(containerView) {
-            hourlyCard_time.text = time
+        override fun setTime(time: Int) = with(containerView) {
+            hourlyCard_time.text = formatUnixUtcHhMm(time)
         }
 
-        override fun setTemperature(temperature: String) = with(containerView) {
-            hourlyCard_temperature.text = temperature
+        override fun setTemperature(temperature: Double) = with(containerView) {
+            hourlyCard_temperature.text = formatTemperatureKelToCel(temperature)
         }
 
         override fun loadIcon(url: String) = with(containerView){

@@ -13,7 +13,7 @@ import ru.geekbrains.myweatherappmvpkotlin.mvp.model.image.IImageLoader
 import ru.geekbrains.myweatherappmvpkotlin.mvp.model.network.INetworkStatus
 import java.io.ByteArrayOutputStream
 
-class GlideImageLoader(val cache: IImageCache, val networkStatus: INetworkStatus): IImageLoader<ImageView> {
+class GlideImageLoader(private val cache: IImageCache, private val networkStatus: INetworkStatus): IImageLoader<ImageView> {
     override fun loadInto(url: String, container: ImageView) {
         networkStatus.isOnlineSingle()
                 .observeOn(AndroidSchedulers.mainThread())

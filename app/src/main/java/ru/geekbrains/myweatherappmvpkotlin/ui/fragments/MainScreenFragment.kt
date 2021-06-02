@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_main_screen.*
-import kotlinx.android.synthetic.main.item_hourly.view.*
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.geekbrains.myweatherappmvpkotlin.App
@@ -39,6 +38,11 @@ class MainScreenFragment: MvpAppCompatFragment(), IMainScreenView, IBackButtonLi
         savedInstanceState: Bundle?
     ) : View = View.inflate(context, R.layout.fragment_main_screen, null)
 
+    override fun onResume() {
+        super.onResume()
+        presenter.onResume()
+    }
+
     override fun backPressed() = presenter.backPressed()
 
     override fun init() {
@@ -59,11 +63,10 @@ class MainScreenFragment: MvpAppCompatFragment(), IMainScreenView, IBackButtonLi
         }
 
         location_btn.setOnClickListener{ presenter.locationPressed()}
-        settings_btn.setOnClickListener{presenter.settingsPressed()}
         swipe_refresh.setOnRefreshListener { presenter.swipeRefreshLayout() }
     }
 
-    override fun updateCurrentView(temperature: String, cityName: String, description: String?, url: String) {
+    override fun updateCurrentView(temperature: Double, cityName: String, description: String, url: String) {
         currentAdapter?.update(temperature, cityName, description, url)
     }
 
@@ -78,6 +81,5 @@ class MainScreenFragment: MvpAppCompatFragment(), IMainScreenView, IBackButtonLi
     override fun setRefreshIcon(icon: Boolean) {
         swipe_refresh.isRefreshing = icon
     }
-
 
 }

@@ -33,14 +33,12 @@ class ApiModule {
             .build()
             .create(IDataSource::class.java)
 
-
     @Singleton
     @Provides
     fun gson() = GsonBuilder()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .excludeFieldsWithoutExposeAnnotation()
             .create()
-
 
     @Singleton
     @Provides

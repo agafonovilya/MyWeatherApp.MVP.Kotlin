@@ -12,6 +12,14 @@ class Daily {
     @Expose
     var temp: Temp? = null
 
+    @SerializedName("humidity")
+    @Expose
+    var humidity: Int? = null
+
+    @SerializedName("wind_speed")
+    @Expose
+    var wind: Double? = null
+
     @SerializedName("weather")
     @Expose
     var weather: List<DailyWeather>? = null
